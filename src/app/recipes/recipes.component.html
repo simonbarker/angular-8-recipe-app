@@ -3,6 +3,9 @@
         <app-recipe-list (recipeToDisplaySelected)="setDispalyRecipe($event)"></app-recipe-list>
     </div>
     <div class="col-md-7">
-        <app-recipe-detail [recipeToDisplay]="recipeToDisplay"></app-recipe-detail>
+        <app-recipe-detail *ngIf="recipeToDisplay; else infoText" [recipeToDisplay]="recipeToDisplay"></app-recipe-detail>
+        <ng-template #infoText>
+            <p>Please select a recipe to view it.</p>
+        </ng-template>
     </div>
 </div>
