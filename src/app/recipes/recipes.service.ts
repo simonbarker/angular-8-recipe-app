@@ -35,6 +35,14 @@ export class RecipesService {
         return this.recipes.slice(); // this returns an exact copy rather than a reference to the actual array
     }
 
+    getRecipeWithName(name: string) {
+        return this.recipes.filter((recipe) => { return recipe.name === name });
+    }
+
+    getRecipeWithId(id: number) {
+        return this.recipes[id];
+    }
+
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.slService.addIngredients(ingredients);
     }
