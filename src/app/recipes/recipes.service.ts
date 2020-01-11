@@ -7,26 +7,27 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class RecipesService {
-    private recipes: Recipe[] = [
-        // tslint:disable-next-line: max-line-length
-        new Recipe('Chilli Con Carne',
-        'A test',
-        'https://www.bbcgoodfood.com/sites/default/files/recipe_images/recipe-image-legacy-id--1001451_6.jpg',
-        [
-            new Ingredient('Mince Beef', 1),
-            new Ingredient('Peppers', 3),
-            new Ingredient('Canned Tomatoes', 5)
-        ]),
-        // tslint:disable-next-line: max-line-length
-        new Recipe('Chicken curry',
-        'A test',
-        'https://www.allchickenrecipes.com/wp-content/uploads/2018/09/Chicken-Curry.jpg',
-        [
-            new Ingredient('Chicken breast', 4),
-            new Ingredient('Tumeric', 4),
-            new Ingredient('Chillis', 3)
-        ])
-    ];
+    // private recipes: Recipe[] = [
+    //     // tslint:disable-next-line: max-line-length
+    //     new Recipe('Chilli Con Carne',
+    //     'A test',
+    //     'https://www.bbcgoodfood.com/sites/default/files/recipe_images/recipe-image-legacy-id--1001451_6.jpg',
+    //     [
+    //         new Ingredient('Mince Beef', 1),
+    //         new Ingredient('Peppers', 3),
+    //         new Ingredient('Canned Tomatoes', 5)
+    //     ]),
+    //     // tslint:disable-next-line: max-line-length
+    //     new Recipe('Chicken curry',
+    //     'A test',
+    //     'https://www.allchickenrecipes.com/wp-content/uploads/2018/09/Chicken-Curry.jpg',
+    //     [
+    //         new Ingredient('Chicken breast', 4),
+    //         new Ingredient('Tumeric', 4),
+    //         new Ingredient('Chillis', 3)
+    //     ])
+    // ];
+    private recipes: Recipe[] = [];
 
     recipesListChanged = new Subject<Recipe[]>();
 
@@ -60,6 +61,11 @@ export class RecipesService {
 
     deleteRecipe(id: number) {
         this.recipes.splice(id, 1);
+        this.recipesListChanged.next(this.recipes.slice());
+    }
+
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
         this.recipesListChanged.next(this.recipes.slice());
     }
 }
